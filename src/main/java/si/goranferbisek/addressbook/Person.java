@@ -2,7 +2,9 @@ package si.goranferbisek.addressbook;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.ws.rs.Path;
 
+@Path("/persons")
 public class Person {
 	@Id
 	private Integer id;
