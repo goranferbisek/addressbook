@@ -3,6 +3,8 @@ package si.goranferbisek.addressbook;
 import javax.enterprise.context.RequestScoped;
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,17 +21,17 @@ import javax.ws.rs.core.Response;
 public class PersonResource {
     
     @GET
-    public Response getMessage() {
-    	JsonObject json = Json.createObjectBuilder()
-    			.add("message", "The API is working")
-    			.build();
+    public Response getMessage() {   	
+    	Person person = new Person("Jane Doe");
+    	Jsonb jsonb = JsonbBuilder.create();
     	
-        return Response.ok().entity(json).build();
+        return Response.ok().entity(jsonb.toJson(person)).build();
     }
     
     @POST
-    public Response savePerson() {
-    	return Response.ok().build();
+    public Response savePerson(Person person) {
+    	Jsonb jsonb = JsonbBuilder.create();
+    	return Response.ok(jsonb.toJson(person)).build();
     }
     
 }
