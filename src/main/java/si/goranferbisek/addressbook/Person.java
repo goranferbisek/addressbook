@@ -12,6 +12,13 @@ public class Person {
 	@Column(name = "name", nullable = false, length = 255)
 	private String name;
 	
+	public Person() {
+	}
+	
+	public Person(String name) {
+		this.name = name;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
