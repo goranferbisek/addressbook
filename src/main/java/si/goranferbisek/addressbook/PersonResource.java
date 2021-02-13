@@ -1,8 +1,6 @@
 package si.goranferbisek.addressbook;
 
 import javax.enterprise.context.RequestScoped;
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.ws.rs.Consumes;
