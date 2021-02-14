@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.json.bind.Jsonb;
@@ -12,12 +13,12 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 
 @Path("person")
@@ -51,29 +52,52 @@ public class PersonResource {
 		}
 		
 	}
+	
+	@GET
+	@Path("test2")
+	public Response test2() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		
+		Person p = new Person("Danilo Petrucci");
+		session.persist(p);
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		return Response.ok().entity(JsonbBuilder.create().toJson(p)).build();
+	}
+	
     @GET
     public Response getAllPersons() {
-    	// test one person
-    	Person person = null;
-		Transaction transaction = null;
-    	Jsonb jsonb = JsonbBuilder.create();
+    	List<Person> persons = null;
     	
-    	try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			transaction = session.beginTransaction();
-			
-			person = session.get(Person.class, new Integer(16));
-			System.out.println("Hello" + person.getName());
-			
-			transaction.commit();
+    	Jsonb jsonb = JsonbBuilder.create();
+    	Session session = HibernateUtil.getSessionFactory().openSession();
+    	
+    	try {
+			persons = session.createQuery("FROM person").getResultList();
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
+		} finally {
+			session.close();
 		}
     	
-        return Response.ok().entity(jsonb.toJson(person)).build();
+        return Response.ok().entity(jsonb.toJson(persons.indexOf(1))).build();
     }
+    
+    @GET
+	@Path("/{id}") 
+	public Response findPerson(@PathParam("id") Integer id) {
+		PersonDao dao = new PersonDao();
+		Person person = dao.get(id);
+		
+		if (person != null) {
+			return Response.status(Response.Status.CREATED).entity(person).build();
+		} else {
+			return Response.status(Response.Status.NOT_FOUND).entity("{\"message\": \"No person found\"}").build();
+		}
+	}
     
     @POST
     public Response savePerson(Person person) {
