@@ -10,8 +10,12 @@ public class Person {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "name", nullable = false, length = 255)
+	@Column(name = "name", nullable = false, length = 128)
 	private String name;
+	
+	/*@OneToOne
+	@JoinColumn(name = "contact_id")
+	private Contact contact;*/
 	
 	public Person() {
 	}

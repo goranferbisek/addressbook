@@ -2,6 +2,10 @@
 .classpath
 .project
 .settings/
+
+# Eclipse DBeaver plugin
+.dbeaver/
+Scripts/
  
 # Intellij
 .idea/
