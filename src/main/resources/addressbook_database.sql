@@ -16,7 +16,9 @@ CREATE TABLE contact (
   phone varchar(128) NOT NULL,
   email varchar(128) NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT fk_person_id FOREIGN KEY (person_id) REFERENCES person (id)
+  UNIQUE KEY (phone),
+  UNIQUE KEY (email),
+  CONSTRAINT fk_person_id FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 
