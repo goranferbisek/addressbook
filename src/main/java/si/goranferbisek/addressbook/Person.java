@@ -13,6 +13,9 @@ public class Person {
 	@Column(name = "name", nullable = false, length = 128)
 	private String name;
 	
+	@OneToOne(mappedBy = "person")
+	private Contact contact;
+	
 	public Person() {
 	}
 	
@@ -34,5 +37,13 @@ public class Person {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
 	}
 }
