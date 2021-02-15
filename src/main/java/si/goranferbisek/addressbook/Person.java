@@ -13,9 +13,6 @@ public class Person {
 	@Column(name = "name", nullable = false, length = 128)
 	private String name;
 	
-	@OneToOne(mappedBy = "contact")
-	private Contact contact;
-	
 	public Person() {
 	}
 	

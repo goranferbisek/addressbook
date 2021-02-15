@@ -18,7 +18,7 @@ public class Contact {
 	private Integer id;
 	
 	@OneToOne
-	@JoinColumn(name = "person_id", referencedColumnName = "id")
+	@JoinColumn(name = "person_id")
 	private Person person;
 	
 	@Column(name = "email", nullable = false, length = 128)
