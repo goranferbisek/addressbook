@@ -13,9 +13,8 @@ public class Person {
 	@Column(name = "name", nullable = false, length = 128)
 	private String name;
 	
-	/*@OneToOne
-	@JoinColumn(name = "contact_id")
-	private Contact contact;*/
+	@OneToOne(mappedBy = "contact")
+	private Contact contact;
 	
 	public Person() {
 	}
