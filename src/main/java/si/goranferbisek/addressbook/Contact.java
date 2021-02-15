@@ -29,6 +29,11 @@ public class Contact {
 	
 	public Contact() {
 	}
+	
+	public Contact(String phone, String email) {
+		this.phone = phone;
+		this.email = email;
+	}
 
 	public Integer getId() {
 		return id;
