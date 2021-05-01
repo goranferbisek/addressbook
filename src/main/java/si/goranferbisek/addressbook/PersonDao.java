@@ -8,12 +8,19 @@ public class PersonDao {
 	
 	public Person get(int idPerson) {
 		Person person = null;
+		Contact contact = null;
 		Transaction transaction = null;
 		
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			transaction = session.beginTransaction();
 			
 			person = session.get(Person.class, idPerson);
+			
+			// not shure this will work
+			contact = session.get(Contact.class, person.getId());
+			
+			person.setContact(contact);
+			
 			System.out.println(person.getName());
 			
 			transaction.commit();
