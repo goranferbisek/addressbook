@@ -1,43 +1,27 @@
 package si.goranferbisek.addressbook;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-
 public class PersonDao {
 	
 	public Person get(int idPerson) {
 		Person person = null;
-		Contact contact = null;
-		Transaction transaction = null;
+		//Contact contact = null;
 		
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			transaction = session.beginTransaction();
+		//@PersistenceContext
+		//EntityManager em;
 			
-			person = session.get(Person.class, idPerson);
+			//person = session.get(Person.class, idPerson);
 			
 			// not shure this will work
-			contact = session.get(Contact.class, person.getId());
-			
-			person.setContact(contact);
-			
-			System.out.println(person.getName());
-			
-			transaction.commit();
-		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			e.printStackTrace();
-		}
-		
-		return person;
+			//contact = session.get(Contact.class, person.getId());
+
+			//person.setContact(contact);
+			return person;
 	}
 	
 	public String save(Person person) {
-		Transaction transaction = null;
+		//Transaction transaction = null;
 		String message = null;
-		
+		/*
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			transaction = session.beginTransaction();
 			session.save(person);
@@ -51,11 +35,12 @@ public class PersonDao {
 			e.printStackTrace();
 			message = "Failed saving" + person.getName() + "to database";
 		}
-		
+		*/
 		return message;
 	}
 	
 	public Person delete(int idPerson) {
+		/*
 		Person person = null;
 		Transaction transaction = null;
 		
@@ -71,7 +56,7 @@ public class PersonDao {
 				transaction.rollback();
 			}
 			e.printStackTrace();
-		}
+		}*/
 		
 		return null;
     }

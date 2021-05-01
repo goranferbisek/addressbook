@@ -1,10 +1,6 @@
 package si.goranferbisek.addressbook;
 
-import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,8 +11,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.hibernate.Session;
-
 
 @Path("person")
 @RequestScoped
@@ -26,10 +20,10 @@ public class PersonResource {
 	
     @GET
     public Response getAllPersons() {
-    	List<Person> persons = null;
+    	//List<Person> persons = null;
     	
-    	Jsonb jsonb = JsonbBuilder.create();
-    	Session session = HibernateUtil.getSessionFactory().openSession();
+    	/*Jsonb jsonb = JsonbBuilder.create();
+    	/Session session = HibernateUtil.getSessionFactory().openSession();
     	
     	try {
 			persons = session.createQuery("FROM person").getResultList();
@@ -37,9 +31,10 @@ public class PersonResource {
 			e.printStackTrace();
 		} finally {
 			session.close();
-		}
+		}*/
     	
-        return Response.ok().entity(jsonb.toJson(persons.indexOf(1))).build();
+        //return Response.ok().entity(jsonb.toJson(persons.indexOf(1))).build();
+    	return null;
     }
     
     @GET
@@ -61,7 +56,7 @@ public class PersonResource {
 		PersonDao dao = new PersonDao();
 		String message = dao.save(person);
 		
-		Jsonb jsonb = JsonbBuilder.create();
+		//Jsonb jsonb = JsonbBuilder.create();
 		
 		return Response.ok("{\"message\": \""+ message +"\"}\"").build();		
 	}
