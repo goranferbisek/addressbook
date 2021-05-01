@@ -49,7 +49,7 @@ public class PersonResource {
 		Person person = dao.get(id);
 		
 		if (person != null) {
-			return Response.status(Response.Status.CREATED).entity(person).build();
+			return Response.ok().entity(person).build();
 		} else {
 			return Response.status(Response.Status.NOT_FOUND).entity("{\"message\": \"No person found\"}").build();
 		}
